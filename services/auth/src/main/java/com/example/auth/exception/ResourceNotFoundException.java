@@ -3,10 +3,11 @@ package com.example.auth.exception;
 public class ResourceNotFoundException extends RuntimeException {
     String resourceName;
     String field;
-    String fieldName;
+    final String fieldName;
     Long fieldId;
 
     public ResourceNotFoundException() {
+        this.fieldName = null;
     }
 
     public ResourceNotFoundException(String resourceName, String field, String fieldName) {
@@ -20,6 +21,7 @@ public class ResourceNotFoundException extends RuntimeException {
         super(String.format("%s not found with %s: %d", resourceName, field, fieldId));
         this.resourceName = resourceName;
         this.field = field;
+        this.fieldName = null;
         this.fieldId = fieldId;
     }
 }

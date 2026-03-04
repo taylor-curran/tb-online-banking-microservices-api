@@ -8,6 +8,8 @@ class NotificationApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// Verifies that the Spring application context loads successfully without errors.
+		// An empty body is intentional — the test passes if the context starts up correctly.
 	}
 
 }

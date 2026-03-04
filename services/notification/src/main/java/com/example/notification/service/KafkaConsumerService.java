@@ -95,7 +95,6 @@ public class KafkaConsumerService {
                 event.getCurrency(),
                 event.getCreatedAt());
 
-//            emailService.sendEmail(event.getEmail(), subject, content);
             log.info("event.getEmail(): {}, subject: {}, content: {}", event.getEmail(), subject, content);
 
         } catch (Exception e) {

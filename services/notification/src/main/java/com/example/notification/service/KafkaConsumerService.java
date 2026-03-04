@@ -52,7 +52,6 @@ public class KafkaConsumerService {
                 event.getStatus());
 
             log.info("event.getEmail(): {}, subject: {}, content: {}", event.getEmail(), subject, content);
-//            emailService.sendEmail(event.getEmail(), subject, content);
 
         } catch (Exception e) {
             log.error("Error processing transaction event: {}", event, e);

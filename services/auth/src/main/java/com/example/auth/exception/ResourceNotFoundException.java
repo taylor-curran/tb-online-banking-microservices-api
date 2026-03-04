@@ -2,11 +2,12 @@ package com.example.auth.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
     String resourceName;
-    String field;
+    final String field;
     String fieldName;
     Long fieldId;
 
     public ResourceNotFoundException() {
+        this.field = null;
     }
 
     public ResourceNotFoundException(String resourceName, String field, String fieldName) {

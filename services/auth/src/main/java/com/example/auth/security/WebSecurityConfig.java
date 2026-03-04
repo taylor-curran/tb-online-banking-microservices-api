@@ -36,6 +36,8 @@ import java.util.Set;
 @EnableWebSecurity
 //@EnableMethodSecurity
 public class WebSecurityConfig {
+    private static final String DEFAULT_USER = "user1";
+
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
@@ -137,8 +139,8 @@ public class WebSecurityConfig {
 
 
             // Create users if not already present
-            if (!userRepository.existsByUserName("user1")) {
-                User user1 = new User("user1", "user1@example.com", passwordEncoder.encode("password1"));
+            if (!userRepository.existsByUserName(DEFAULT_USER)) {
+                User user1 = new User(DEFAULT_USER, "user1@example.com", passwordEncoder.encode("password1"));
                 userRepository.save(user1);
             }
 
@@ -153,7 +155,7 @@ public class WebSecurityConfig {
             }
 
             // Update roles for existing users
-            userRepository.findByUserName("user1").ifPresent(user -> {
+            userRepository.findByUserName(DEFAULT_USER).ifPresent(user -> {
                 user.setRoles(userRoles);
                 userRepository.save(user);
             });

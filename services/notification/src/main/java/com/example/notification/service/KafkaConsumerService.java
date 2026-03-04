@@ -16,8 +16,6 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class KafkaConsumerService {
 
-    private final EmailService emailService;
-
     @KafkaListener(
         topics = "transaction-events",
         groupId = "notification-group",

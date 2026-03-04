@@ -23,6 +23,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AccountService {
 
+    private static final String ACCOUNT_NOT_FOUND_MSG = "Account not found with id: ";
+
     @Autowired
     private  AccountRepository accountRepository;
     private final AccountEventPublisher accountEventPublisher;
@@ -84,7 +86,7 @@ public class AccountService {
 
     public AccountResponseDto getAccountById(Long id) {
         Account account = accountRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Account not found with id: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException(ACCOUNT_NOT_FOUND_MSG + id));
         return mapToResponseDto(account);
     }
 
@@ -111,7 +113,7 @@ public class AccountService {
     @Transactional
     public AccountResponseDto updateBalance(Long accountId, BigDecimal newBalance) {
         Account account = accountRepository.findById(accountId)
-            .orElseThrow(() -> new ResourceNotFoundException("Account not found with id: " + accountId));
+            .orElseThrow(() -> new ResourceNotFoundException(ACCOUNT_NOT_FOUND_MSG + accountId));
 
         account.setBalance(newBalance);
         account.setUpdatedAt(LocalDateTime.now());
@@ -124,7 +126,7 @@ public class AccountService {
     @Transactional
     public AccountResponseDto deactivateAccount(Long accountId) {
         Account account = accountRepository.findById(accountId)
-            .orElseThrow(() -> new ResourceNotFoundException("Account not found with id: " + accountId));
+            .orElseThrow(() -> new ResourceNotFoundException(ACCOUNT_NOT_FOUND_MSG + accountId));
 
         account.setIsActive(false);
         account.setUpdatedAt(LocalDateTime.now());

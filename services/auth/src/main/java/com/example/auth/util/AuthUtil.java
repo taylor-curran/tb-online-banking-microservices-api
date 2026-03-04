@@ -11,13 +11,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthUtil {
 
+    private static final String USER_NOT_FOUND_MSG = "User Not Found with username: ";
+
     @Autowired
     UserRepository userRepository;
 
     public String loggedInEmail(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUserName(authentication.getName())
-            .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + authentication.getName()));
+            .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND_MSG + authentication.getName()));
 
         return user.getEmail();
     }
@@ -25,7 +27,7 @@ public class AuthUtil {
     public Long loggedInUserId(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUserName(authentication.getName())
-            .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + authentication.getName()));
+            .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND_MSG + authentication.getName()));
 
         return user.getUserId();
     }
@@ -34,7 +36,7 @@ public class AuthUtil {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         User user = userRepository.findByUserName(authentication.getName())
-            .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + authentication.getName()));
+            .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND_MSG + authentication.getName()));
         return user;
 
     }

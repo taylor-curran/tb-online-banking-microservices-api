@@ -4,9 +4,10 @@ public class ResourceNotFoundException extends RuntimeException {
     String resourceName;
     String field;
     String fieldName;
-    Long fieldId;
+    final Long fieldId;
 
     public ResourceNotFoundException() {
+        this.fieldId = null;
     }
 
     public ResourceNotFoundException(String resourceName, String field, String fieldName) {
@@ -14,6 +15,7 @@ public class ResourceNotFoundException extends RuntimeException {
         this.resourceName = resourceName;
         this.field = field;
         this.fieldName = fieldName;
+        this.fieldId = null;
     }
 
     public ResourceNotFoundException(String resourceName, String field, Long fieldId) {

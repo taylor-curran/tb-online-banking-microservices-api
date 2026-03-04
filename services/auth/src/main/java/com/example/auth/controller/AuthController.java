@@ -37,6 +37,8 @@ public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
+    private static final String ROLE_NOT_FOUND_ERROR = "Error: Role is not found.";
+
     @Autowired
     private JwtUtils jwtUtils;
 
@@ -111,7 +113,7 @@ public class AuthController {
         if (strRoles == null) {
             logger.info("No roles specified, assigning default ROLE_USER");
             Role userRole = roleRepository.findByRoleName(AppRole.ROLE_USER)
-                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                .orElseThrow(() -> new RuntimeException(ROLE_NOT_FOUND_ERROR));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
@@ -119,17 +121,17 @@ public class AuthController {
                 switch (role) {
                     case "admin":
                         Role adminRole = roleRepository.findByRoleName(AppRole.ROLE_ADMIN)
-                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                            .orElseThrow(() -> new RuntimeException(ROLE_NOT_FOUND_ERROR));
                         roles.add(adminRole);
                         break;
                     case "seller":
                         Role modRole = roleRepository.findByRoleName(AppRole.ROLE_SELLER)
-                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                            .orElseThrow(() -> new RuntimeException(ROLE_NOT_FOUND_ERROR));
                         roles.add(modRole);
                         break;
                     default:
                         Role userRole = roleRepository.findByRoleName(AppRole.ROLE_USER)
-                            .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                            .orElseThrow(() -> new RuntimeException(ROLE_NOT_FOUND_ERROR));
                         roles.add(userRole);
                 }
             });

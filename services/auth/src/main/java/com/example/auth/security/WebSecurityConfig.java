@@ -36,6 +36,8 @@ import java.util.Set;
 @EnableWebSecurity
 //@EnableMethodSecurity
 public class WebSecurityConfig {
+    private static final String SELLER1_USERNAME = "seller1";
+
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
@@ -142,8 +144,8 @@ public class WebSecurityConfig {
                 userRepository.save(user1);
             }
 
-            if (!userRepository.existsByUserName("seller1")) {
-                User seller1 = new User("seller1", "seller1@example.com", passwordEncoder.encode("password2"));
+            if (!userRepository.existsByUserName(SELLER1_USERNAME)) {
+                User seller1 = new User(SELLER1_USERNAME, "seller1@example.com", passwordEncoder.encode("password2"));
                 userRepository.save(seller1);
             }
 
@@ -158,7 +160,7 @@ public class WebSecurityConfig {
                 userRepository.save(user);
             });
 
-            userRepository.findByUserName("seller1").ifPresent(seller -> {
+            userRepository.findByUserName(SELLER1_USERNAME).ifPresent(seller -> {
                 seller.setRoles(sellerRoles);
                 userRepository.save(seller);
             });

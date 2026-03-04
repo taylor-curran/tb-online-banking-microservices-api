@@ -8,6 +8,8 @@ class AccountApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// Verifies that the Spring application context loads successfully without errors.
+		// No explicit assertions needed — the test fails automatically if the context cannot start.
 	}
 
 }

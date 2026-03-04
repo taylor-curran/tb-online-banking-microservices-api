@@ -8,6 +8,7 @@ class LoanApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// Verifies that the Spring application context loads successfully without errors
 	}
 
 }

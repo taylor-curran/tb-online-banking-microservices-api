@@ -8,6 +8,7 @@ class AuthApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// Intentionally empty: verifies that the Spring application context loads successfully without errors.
 	}
 
 }
